@@ -37,10 +37,13 @@ namespace DDSReader
 
 		public DDSImage(byte[] data)
 		{
-			if (data == null || data.Length <= 0)
-				throw new Exception("DDSImage ctor: no data");
-
-			_image = Pfim.Dds.Create(data, new Pfim.PfimConfig());
+			using (var ms=new MemoryStream(data)) {
+                _image = Pfim.Pfim.FromStream(ms);
+            }
+			// if (data == null || data.Length <= 0)
+			// 	throw new Exception("DDSImage ctor: no data");
+			   
+			// _image = Pfim.Dds.Create(data, new Pfim.PfimConfig());
 			Process();
 		}
 

@@ -5,8 +5,21 @@ namespace DDSReader.Console
 {
 	class Program
 	{
-		static void Main(string[] args)
-		{
+		static void Main(string[] args) {
+            var files = Directory.GetFiles(".","*.dds");
+            foreach (var file in files) {
+                var pngFile = Path.ChangeExtension(file, "png");
+                System.Console.WriteLine($"Saving {file} -> {pngFile}");
+                try {
+                    var dds = new DDSImage(file);
+                    dds.Save(pngFile);
+                }
+                catch (Exception e) {
+                    System.Console.WriteLine($"   failed {e.Message}");
+                }
+            }
+
+            return;
 			if (args.Length != 2)
 			{
 				System.Console.WriteLine("ERROR: input and output file required\n");
