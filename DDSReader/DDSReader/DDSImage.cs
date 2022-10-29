@@ -22,7 +22,7 @@ namespace DDSReader
 
 		public DDSImage(string file)
 		{
-			_image = Pfim.Pfim.FromFile(file);
+			_image = Pfim.Pfimage.FromFile(file);
 			Process();
 		}
 
@@ -38,7 +38,7 @@ namespace DDSReader
 		public DDSImage(byte[] data)
 		{
 			using (var ms=new MemoryStream(data)) {
-                _image = Pfim.Pfim.FromStream(ms);
+                _image = Pfim.Pfimage.FromStream(ms);
             }
 			// if (data == null || data.Length <= 0)
 			// 	throw new Exception("DDSImage ctor: no data");
